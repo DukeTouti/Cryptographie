@@ -1,0 +1,3 @@
+[submodule "seed-labs"]
+	path = seed-labs
+	url = https://github.com/seed-labs/seed-labs.git
