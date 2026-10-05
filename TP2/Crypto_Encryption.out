@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Overview}{}% 1
+\BOOKMARK [1][-]{section.2}{Lab Environment}{}% 2
+\BOOKMARK [1][-]{section.3}{Task 1: Frequency Analysis}{}% 3
+\BOOKMARK [1][-]{section.4}{Task 2: Encryption using Different Ciphers and Modes}{}% 4
+\BOOKMARK [1][-]{section.5}{Task 3: Encryption Mode \205 ECB vs. CBC}{}% 5
+\BOOKMARK [1][-]{section.6}{Task 4: Padding}{}% 6
+\BOOKMARK [1][-]{section.7}{Task 5: Error Propagation \205 Corrupted Cipher Text}{}% 7
+\BOOKMARK [1][-]{section.8}{Task 6: Initial Vector \(IV\) and Common Mistakes}{}% 8
+\BOOKMARK [2][-]{subsection.8.1}{Task 6.1. IV Experiment}{section.8}% 9
+\BOOKMARK [2][-]{subsection.8.2}{Task 6.2. Common Mistake: Use the Same IV}{section.8}% 10
+\BOOKMARK [2][-]{subsection.8.3}{Task 6.3. Common Mistake: Use a Predictable IV}{section.8}% 11
+\BOOKMARK [2][-]{subsection.8.4}{Additional Readings}{section.8}% 12
+\BOOKMARK [1][-]{section.9}{Task 7: Programming using the Crypto Library}{}% 13
+\BOOKMARK [1][-]{section.10}{Submission}{}% 14
+\BOOKMARK [1][-]{section.11}{Acknowledgment}{}% 15
