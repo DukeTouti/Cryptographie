@@ -2,7 +2,7 @@ CC     = gcc
 CFLAGS = -g
 LIBS   = -lcrypto
 
-PROGS = bn_sample task1 task2 task3 task4
+PROGS = bn_sample task1 task2 task3 task4 task5
 
 all: $(PROGS)
 
