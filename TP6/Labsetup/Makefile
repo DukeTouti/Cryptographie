@@ -1,0 +1,15 @@
+CC     = gcc
+CFLAGS = -g
+LIBS   = -lcrypto
+
+PROGS = bn_sample task1 task2 task3 task4 task5 task6
+
+all: $(PROGS)
+
+%: %.c
+	$(CC) $(CFLAGS) $< -o $@ $(LIBS)
+
+clean:
+	rm -f $(PROGS) *.o
+
+.PHONY: all clean
