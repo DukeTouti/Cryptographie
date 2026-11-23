@@ -14,4 +14,11 @@ contract DecentralizedVoting {
 		address candidateAddress;
 		uint voteCount;
 	}
+	
+	address public owner;
+	bool public votingEnded;
+
+	mapping(address => Voter) public voters;
+	mapping(address => Candidate) public candidates;
+	address[] public candidateList;
 }
