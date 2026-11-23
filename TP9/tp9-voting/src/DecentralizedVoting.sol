@@ -21,4 +21,19 @@ contract DecentralizedVoting {
 	mapping(address => Voter) public voters;
 	mapping(address => Candidate) public candidates;
 	address[] public candidateList;
+
+	modifier onlyOwner() {
+		require(msg.sender == owner, "Caller is not the owner");
+		_;
+	}
+
+	modifier onlyRegisteredVoters() {
+		require(voters[msg.sender].voterAddress != address(0), "Caller is not a registered voter");
+		_;
+	}
+
+	modifier onlyBeforeVotingEnded() {
+		require(!votingEnded, "Voting has ended");
+		_;
+	}
 }
