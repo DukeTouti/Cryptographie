@@ -21,6 +21,11 @@ contract DecentralizedVoting {
 	mapping(address => Voter) public voters;
 	mapping(address => Candidate) public candidates;
 	address[] public candidateList;
+	
+	event VoterRegistered(address indexed voter);
+	event CandidateProposed(address indexed proposer, address indexed candidate);
+	event VoteCast(address indexed voter, address indexed candidate);
+	event VotingEnded();
 
 	modifier onlyOwner() {
 		require(msg.sender == owner, "Caller is not the owner");
