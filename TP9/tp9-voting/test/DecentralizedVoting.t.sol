@@ -123,4 +123,79 @@ contract DecentralizedVotingTest is Test {
 		assertEq(addrs[0], account5);
 		assertEq(counts[0], 1);
 	}
+	
+		// ---------------- Partie A : events ----------------
+
+	function test_A_EventVoterRegistered() public {
+		vm.expectEmit(address(voting));
+		emit DecentralizedVoting.VoterRegistered(account2);
+		vm.prank(account1);
+		voting.registerVoter(account2);
+	}
+
+	function test_A_EventCandidateProposed() public {
+		_etape2();
+		vm.expectEmit(address(voting));
+		emit DecentralizedVoting.CandidateProposed(account2, account5);
+		vm.prank(account2);
+		voting.proposeCandidate(account5);
+	}
+
+	function test_A_EventVoteCast() public {
+		_etape4();
+		vm.expectEmit(address(voting));
+		emit DecentralizedVoting.VoteCast(account2, account5);
+		vm.prank(account2);
+		voting.vote(account5);
+	}
+
+	function test_A_EventVotingEnded() public {
+		vm.expectEmit(address(voting));
+		emit DecentralizedVoting.VotingEnded();
+		vm.prank(account1);
+		voting.endVote();
+	}
+
+	// ---------------- Partie A : getWinner ----------------
+
+	function test_A_WinnerAvantFin() public {
+		_etape7();
+		vm.expectRevert("Voting has not ended yet");
+		voting.getWinner();
+	}
+
+	function test_A_WinnerCompte5() public {
+		_etape10();
+		(address winner, uint count) = voting.getWinner();
+		assertEq(winner, account5);
+		assertEq(count, 1);
+	}
+
+	function test_A_WinnerEgalite() public {
+		_etape2();
+		vm.prank(account2);
+		voting.proposeCandidate(account5);
+		vm.prank(account3);
+		voting.proposeCandidate(account6);
+		vm.prank(account2);
+		voting.vote(account5);
+		vm.prank(account3);
+		voting.vote(account6);
+		vm.prank(account1);
+		voting.endVote();
+
+		(address winner, uint count) = voting.getWinner();
+		assertEq(winner, address(0));
+		assertEq(count, 1);
+	}
+
+	function test_A_WinnerAucunVote() public {
+		_etape4();
+		vm.prank(account1);
+		voting.endVote();
+
+		(address winner, uint count) = voting.getWinner();
+		assertEq(winner, address(0));
+		assertEq(count, 0);
+	}
 }
