@@ -36,4 +36,8 @@ contract DecentralizedVoting {
 		require(!votingEnded, "Voting has ended");
 		_;
 	}
+	
+	constructor() {
+		owner = msg.sender;
+	}
 }
