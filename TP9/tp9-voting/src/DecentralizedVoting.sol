@@ -72,6 +72,10 @@ contract DecentralizedVoting {
 		candidates[_candidate].voteCount++;
 	}
 
+	function endVote() public onlyOwner onlyBeforeVotingEnded {
+		votingEnded = true;
+	}
+
 }
 
 
