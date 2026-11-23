@@ -76,6 +76,20 @@ contract DecentralizedVoting {
 		votingEnded = true;
 	}
 
+	function getResults() public view returns (address[] memory, uint[] memory) {
+		require(votingEnded, "Voting has not ended yet");
+
+		uint n = candidateList.length;
+		address[] memory addrs = new address[](n);
+		uint[] memory counts = new uint[](n);
+
+		for (uint i = 0; i < n; i++) {
+			addrs[i] = candidateList[i];
+			counts[i] = candidates[candidateList[i]].voteCount;
+		}
+		return (addrs, counts);
+	}
+
 }
 
 
