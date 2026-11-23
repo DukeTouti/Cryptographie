@@ -40,4 +40,27 @@ contract DecentralizedVoting {
 	constructor() {
 		owner = msg.sender;
 	}
+
+	function registerVoter(address _voter) public onlyOwner {
+		require(_voter != address(0), "Invalid address");
+		require(voters[_voter].voterAddress == address(0), "Voter already registered");
+
+		voters[_voter] = Voter({
+			voterAddress: _voter,
+			hasVoted: false,
+			votedFor: address(0),
+			hasProposed: false
+		});
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
