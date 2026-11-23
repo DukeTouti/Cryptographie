@@ -56,6 +56,8 @@ contract DecentralizedVoting {
 			votedFor: address(0),
 			hasProposed: false
 		});
+		
+		emit VoterRegistered(_voter);
 	}
 
 	function proposeCandidate(address _candidate) public onlyRegisteredVoters onlyBeforeVotingEnded {
@@ -66,6 +68,8 @@ contract DecentralizedVoting {
 		voters[msg.sender].hasProposed = true;
 		candidates[_candidate] = Candidate({candidateAddress: _candidate, voteCount: 0});
 		candidateList.push(_candidate);
+		
+		emit CandidateProposed(msg.sender, _candidate);
 	}
 
 	function vote(address _candidate) public onlyRegisteredVoters onlyBeforeVotingEnded {
@@ -75,10 +79,14 @@ contract DecentralizedVoting {
 		voters[msg.sender].hasVoted = true;
 		voters[msg.sender].votedFor = _candidate;
 		candidates[_candidate].voteCount++;
+		
+		emit VoteCast(msg.sender, _candidate);
 	}
 
 	function endVote() public onlyOwner onlyBeforeVotingEnded {
 		votingEnded = true;
+		
+		emit VotingEnded();
 	}
 
 	function getResults() public view returns (address[] memory, uint[] memory) {
