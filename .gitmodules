@@ -1,3 +1,6 @@
 [submodule "seed-labs"]
 	path = seed-labs
 	url = https://github.com/seed-labs/seed-labs.git
+[submodule "TP9/tp9-voting/lib/forge-std"]
+	path = TP9/tp9-voting/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
