@@ -63,6 +63,15 @@ contract DecentralizedVoting {
 		candidateList.push(_candidate);
 	}
 
+	function vote(address _candidate) public onlyRegisteredVoters onlyBeforeVotingEnded {
+		require(!voters[msg.sender].hasVoted, "Voter has already voted");
+		require(candidates[_candidate].candidateAddress != address(0), "Not a valid candidate");
+
+		voters[msg.sender].hasVoted = true;
+		voters[msg.sender].votedFor = _candidate;
+		candidates[_candidate].voteCount++;
+	}
+
 }
 
 
