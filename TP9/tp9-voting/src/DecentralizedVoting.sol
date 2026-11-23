@@ -102,6 +102,37 @@ contract DecentralizedVoting {
 		}
 		return (addrs, counts);
 	}
+	
+	/// @notice Renvoie le gagnant et son nombre de votes.
+	/// @dev Choix en cas d'egalite : on renvoie address(0) avec le score maximal.
+	///      Designer arbitrairement un gagnant (par exemple le premier propose)
+	///      serait injuste, car l'ordre de proposition n'a rien a voir avec le vote.
+	///      address(0) signale clairement qu'il n'y a pas de gagnant unique, et le
+	///      score renvoye permet de retrouver les ex aequo via getResults().
+	///      S'il n'y a aucun vote, la fonction renvoie (address(0), 0).
+	function getWinner() public view returns (address, uint) {
+		require(votingEnded, "Voting has not ended yet");
+
+		address winner = address(0);
+		uint maxVotes = 0;
+		bool tie = false;
+
+		for (uint i = 0; i < candidateList.length; i++) {
+			uint count = candidates[candidateList[i]].voteCount;
+			if (count > maxVotes) {
+				maxVotes = count;
+				winner = candidateList[i];
+				tie = false;
+			} else if (count == maxVotes && count > 0) {
+				tie = true;
+			}
+		}
+
+		if (tie) {
+			return (address(0), maxVotes);
+		}
+		return (winner, maxVotes);
+	}
 
 }
 
